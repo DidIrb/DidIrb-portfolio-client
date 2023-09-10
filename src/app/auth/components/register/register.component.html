@@ -1,0 +1,15 @@
+<!-- WE ARE NOT FOCUSING ON THE CSS THIS CAN COME LATER -->
+<ng-container *ngIf="data$ | async as data">
+  <a routerLink="/auth/login">Have an account?</a>
+  <br>
+  <mc-backend-error-messages
+    *ngIf="data.backendErrors"
+    [backendErrors]="data.backendErrors"
+  ></mc-backend-error-messages> 
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="username" placeholder="Username" />
+    <input type="text" formControlName="email" placeholder="Email" />
+    <input type="password" formControlName="password" placeholder="Password" />
+    <button [disabled]="data.isSubmitting" type="submit">Submit</button>
+  </form>
+</ng-container>
