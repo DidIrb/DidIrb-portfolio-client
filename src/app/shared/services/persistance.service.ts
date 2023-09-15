@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { CurrentUserInterface } from '../types/currentUser.interface';
 
 @Injectable({ providedIn: 'root' })
 export class PersistanceService {
+
   set(key: string, data: unknown): void {
     try {
       localStorage.setItem(key, JSON.stringify(data));
@@ -19,4 +21,5 @@ export class PersistanceService {
       return null;
     }
   }
+
 }

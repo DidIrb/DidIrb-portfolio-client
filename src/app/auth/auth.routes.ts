@@ -8,7 +8,7 @@ export const registerRoute: Route[] = [
         component: RegisterComponent
     },
     {
-        path: 'login',
+        path: 'signin',
         component: LoginComponent
     }
 ]

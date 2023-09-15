@@ -1,9 +1,9 @@
 export interface CurrentUserInterface {
     username: string;
     email: string;
-    bio: string | null;
     image: string | null;
-    // Tokens
-    accessToken: string;
-    refreshToken: string;
-}
+    bio: string | null;
+}    
+// Tokens removing token
+// accessToken: string;
+// refreshToken: string;

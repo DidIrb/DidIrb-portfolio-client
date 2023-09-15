@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { AuthStateInterface } from '../auth/types/authState.interface';
+import { AuthStateInterface } from '../../auth/types/authState.interface';
 import { authActions } from './action';
 
 const initialState: AuthStateInterface = {
@@ -8,6 +8,7 @@ const initialState: AuthStateInterface = {
   currentUser: undefined,
   validationErrors: null,
 };
+
 // AUTH FEATURES
 const authFeature = createFeature({
   name: 'auth',
@@ -45,8 +46,26 @@ const authFeature = createFeature({
       isSubmitting: false,
       validationErrors: action.errors,
     })),
+
+    // PERSISTENCE
+    on(authActions.persistence, (state) => ({
+      ...state,
+      isSubmitting: true,
+      validationErrors: null,
+    })),
+    on(authActions.persistenceSuccess, (state, action) => ({
+      ...state,
+      isSubmitting: false,
+      currentUser: action.currentUser,
+    })),
+    on(authActions.persistenceFailure, (state, action) => ({
+      ...state,
+      isSubmitting: false,
+      validationErrors: action.errors,
+    })),
   ),
 });
+
 
 // This creates selectors for us automatically.
 export const {

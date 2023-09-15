@@ -5,10 +5,13 @@ import { appRoute } from './app/app.routes';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { isDevMode } from '@angular/core';
-import { authFeatureKey, authReducer } from './app/store/reducers';
-import { provideHttpClient } from '@angular/common/http';
+import { authFeatureKey, authReducer } from './app/store/auth/reducers';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { provideEffects } from '@ngrx/effects';
-import * as authEffects from "./app/store/effects";
+import { TokenInterceptor } from './app/shared/services/http-interceptor.service';
+import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { AuthEffects } from './app/store/auth/effects';
+// adding it my main.ts file
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -16,7 +19,11 @@ bootstrapApplication(AppComponent, {
     provideRouter(appRoute),
     provideStore(),
     provideState(authFeatureKey, authReducer),
-    provideEffects(authEffects),
+    AuthEffects,
+    provideEffects([AuthEffects]),
+    JwtHelperService,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),

@@ -1,8 +1,20 @@
 <!-- *ngIf="data$ | async as data" -->
 <!-- This page lists a number of projects -->
-<ng-container >
+<ng-container *ngIf="data$ | async as data">
     WELCOME HOME 
     <!-- Viewing the change in states -->
-    
+    <mc-backend-error-messages
+    *ngIf="data.backendErrors"
+    [backendErrors]="data.backendErrors"
+  ></mc-backend-error-messages> 
+
+  <!-- Displaying users Data -->
+
+  <h3>{{data.userData?.username}}</h3>
+  <h3>{{data.userData?.email}}</h3>
+  <img [src]="data.userData?.image" alt="user profile image">
+  <!-- Going back to first page -->
+  <!-- <a routerLink="/auth/signin">Go to sign in page</a>  -->
+
 </ng-container>
 
