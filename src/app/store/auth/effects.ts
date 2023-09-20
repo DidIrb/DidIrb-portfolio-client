@@ -74,6 +74,33 @@ export class AuthEffects {
     ), { dispatch: false }
   )
 
+  logoutEffect = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.logout),
+      switchMap(() => {
+        return this.authService.logout().pipe(
+          map((message: string) => {
+            console.log(message); // This will log "logout successful"
+            return authActions.logoutSuccess({payload: null});
+          }),
+          catchError((error) => {
+            return of(authActions.logoutFailure({ errors: error }));
+          })
+        );
+      })
+    )
+  );
+
+  redirectAfterLogoutEffect = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.logoutSuccess),
+      tap(() => {
+        localStorage.removeItem("data");
+        // this.router.navigateByUrl('/auth/signin')
+      })
+    ), { dispatch: false }
+  )
+
   persistanceEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.persistence),
@@ -83,7 +110,8 @@ export class AuthEffects {
           console.log(userData)
           return authActions.persistenceSuccess({currentUser: userData});
         } else {
-          const error: any = "Details not found"
+          this.router.navigateByUrl('/administrator/home');
+          const error: any = "Details not found so logging you out"
           return authActions.persistenceFailure({ errors: error });
         }
       }),

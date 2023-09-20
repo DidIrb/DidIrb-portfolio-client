@@ -9,6 +9,8 @@ const initialState: AuthStateInterface = {
   validationErrors: null,
 };
 
+
+
 // AUTH FEATURES
 const authFeature = createFeature({
   name: 'auth',
@@ -42,6 +44,19 @@ const authFeature = createFeature({
       currentUser: action.currentUser,
     })),
     on(authActions.signinFailure, (state, action) => ({
+      ...state,
+      isSubmitting: false,
+      validationErrors: action.errors,
+    })),
+
+    // LOGOUT
+    on(authActions.logout, () => initialState),
+    on(authActions.logoutSuccess, (state) => ({
+      ...state,
+      isSubmitting: false,
+      currentUser: null,
+    })),
+    on(authActions.logoutFailure, (state, action) => ({
       ...state,
       isSubmitting: false,
       validationErrors: action.errors,

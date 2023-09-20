@@ -5,27 +5,30 @@ import { catchError, switchMap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { authActions } from 'src/app/store/auth/action';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(public auth: AuthService, private router: Router) {}
+  constructor(public auth: AuthService, private router: Router, private store: Store) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
+          console.log("something wrong with token fix it now...");
           return this.auth.refreshToken().pipe(
             switchMap((response: HttpResponse<any>) => {
               if (response.status === 200) {
                 return next.handle(request);
               } else {
-                this.auth.logout();
+                console.log("logging user out!!!");
+                this.store.dispatch(authActions.logout({payload: null}));
                 return throwError(() => error);
               }
             }),
             catchError((refreshError: HttpErrorResponse) => {
-              this.auth.logout();
-              this.router.navigate(['auth/signin']);
+              this.store.dispatch(authActions.logout({payload: null}));
               return throwError(() => refreshError);
             })
           );

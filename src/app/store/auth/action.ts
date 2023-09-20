@@ -17,7 +17,13 @@ export const authActions = createActionGroup({
     Persistence: props<{ userData: CurrentUserInterface }>(),
     'Persistence success': props<{ currentUser: CurrentUserInterface }>(),
     'Persistence failure': props<{ errors: BackendErrorsInterface }>(),
+
+    Logout: props<{ payload: null }>(),
+    'logout success': props<{ payload: null }>(),
+    'logout failure': props<{ errors: BackendErrorsInterface }>(),
   },
 
 });
 
+// Logout action
+// export const logout = createAction('[Auth] Logout');
