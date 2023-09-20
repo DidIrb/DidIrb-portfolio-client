@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+}
+
+.separating-bar {
+    width: 100%;
+    height: 4px;
+    background-color: #FAF5F4;
+}
+
+.brand {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 35px;
+}
+
+.brand img{
+    width: 90px;
+}
+.link:hover,
+.active {
+    // background-color: #E12827;
+    color: #E12827;
+    font-size: 18px;
+}
+.links-container {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.link {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.link span {
+    margin-right: 10px;
+}

@@ -6,7 +6,6 @@ import { throwError } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { authActions } from 'src/app/store/auth/action';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {

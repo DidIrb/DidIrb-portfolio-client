@@ -18,5 +18,9 @@ export class BackendErrorMessages {
             const messages = this.backendErrors[name];
             return `${messages}`;
         })
+
+        setTimeout(() => {
+            this.errorMessages = [];
+        }, 5000);
     }
 }

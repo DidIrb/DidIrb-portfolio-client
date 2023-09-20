@@ -1,1 +1,25 @@
-<p>sidebar works!</p>
+<div class="container">
+  <div class="brand">
+    <img src="../../../../assets/images/logo2.svg" alt="" />
+  </div>
+
+  <div class="separating-bar"></div>
+
+  <div class="links-container">
+    <!-- Loop through and list the data we need -->
+    <div class="paths"  >
+      <div class="link" *ngFor="let item of menuItems" routerLinkActive="active"  [routerLink]="[item.path]">
+        <span class="material-symbols-outlined"> {{item.icon}} </span>
+        <span>{{item.title}}</span>
+      </div>
+    </div>
+
+    <div class="signout">
+      <div class="link">
+        <span class="material-symbols-outlined"> logout </span>
+        <span (click)="logout()">Sign out</span>
+      </div>
+    </div>
+
+  </div>
+</div>
