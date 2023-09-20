@@ -23,12 +23,12 @@ export class TokenInterceptor implements HttpInterceptor {
                 return next.handle(request);
               } else {
                 console.log("logging user out!!!");
-                this.store.dispatch(authActions.logout({payload: null}));
+                this.auth.logout();
                 return throwError(() => error);
               }
             }),
             catchError((refreshError: HttpErrorResponse) => {
-              this.store.dispatch(authActions.logout({payload: null}));
+              this.auth.logout();
               return throwError(() => refreshError);
             })
           );

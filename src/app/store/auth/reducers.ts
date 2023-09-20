@@ -49,18 +49,6 @@ const authFeature = createFeature({
       validationErrors: action.errors,
     })),
 
-    // LOGOUT
-    on(authActions.logout, () => initialState),
-    on(authActions.logoutSuccess, (state) => ({
-      ...state,
-      isSubmitting: false,
-      currentUser: null,
-    })),
-    on(authActions.logoutFailure, (state, action) => ({
-      ...state,
-      isSubmitting: false,
-      validationErrors: action.errors,
-    })),
 
     // PERSISTENCE
     on(authActions.persistence, (state) => ({

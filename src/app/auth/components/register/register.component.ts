@@ -26,6 +26,7 @@ export class RegisterComponent {
     email: ['', Validators.required],
     password: ['', Validators.required],
   });
+  
   data$ = combineLatest({
     isSubmitting: this.store.select(selectIsSubmitting),
     backendErrors: this.store.select(selectValidationErrors),

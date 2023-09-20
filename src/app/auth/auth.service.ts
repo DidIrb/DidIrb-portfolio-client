@@ -33,12 +33,12 @@ export class AuthService {
       .pipe(map((response) => response.data));
   }
 
-  logout(): Observable<string> {
-    const url = environment.apiUrl + '/auth/logout';
-    console.log(url)
-    return this.http
-      .post(url, {}, { responseType: 'text', withCredentials: true });
-  }
+  // logout(): Observable<string> {
+  //   const url = environment.apiUrl + '/auth/logout';
+  //   console.log(url)
+  //   return this.http
+  //     .post(url, {}, { responseType: 'text', withCredentials: true });
+  // }
 
   // isLoggedIn = new BehaviorSubject<boolean>(false);
 
@@ -62,22 +62,23 @@ export class AuthService {
     return this.http.post(url, {}, { observe: 'response' });
   }
 
-  // logout() {
-  //   const url = environment.apiUrl + '/auth/logout';
-  //   localStorage.removeItem("data");
-  //   return this.http.post(url, {}, { observe: 'response', withCredentials: true }).subscribe({
-  //       next: (response) => {
-  //         // this.checkLoginStatus();
-  //         this.store.dispatch(authActions.logout({ payload: null }));
-  //         console.log("this was the response", response)
-  //       },
-  //       error: (error) => {
-  //         console.error('Error logging out', error);
-  //       }
-  //     }
-  //   );
+  logout() {
+    const url = environment.apiUrl + '/auth/logout';
+    return this.http.post(url, {}, { observe: 'response', withCredentials: true }).subscribe({
+      next: (response) => {
+          // this.checkLoginStatus();
+          console.log("this was the response, so we will remove users Data", response)
+          // Refresh to remove users data
+          localStorage.removeItem("data");
+          window.location.reload();
+        },
+        error: (error) => {
+          console.error('Error logging out', error);
+        }
+      }
+    );
   
-  // }
+  }
   
   
 }

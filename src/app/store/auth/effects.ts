@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthEffects {
 
+  // REGISTER EFFECT
   registerEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.register),
@@ -33,7 +34,7 @@ export class AuthEffects {
       })
     )
   );
-
+  // REDIRECT ON SUCCESSFUL REGISTRATION
   redirectAfterRegisterEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.registerSuccess),
@@ -42,7 +43,8 @@ export class AuthEffects {
       })
     ), { dispatch: false }
   )
-
+  
+  // SIGN IN EFFECT
   signInEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.signin),
@@ -65,6 +67,7 @@ export class AuthEffects {
     )
   );
 
+  // REDIRECT ON SUCCESSFUL SIGN IN
   redirectAfterSignInEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.signinSuccess),
@@ -74,33 +77,7 @@ export class AuthEffects {
     ), { dispatch: false }
   )
 
-  logoutEffect = createEffect(() =>
-    this.actions$.pipe(
-      ofType(authActions.logout),
-      switchMap(() => {
-        return this.authService.logout().pipe(
-          map((message: string) => {
-            console.log(message); // This will log "logout successful"
-            return authActions.logoutSuccess({payload: null});
-          }),
-          catchError((error) => {
-            return of(authActions.logoutFailure({ errors: error }));
-          })
-        );
-      })
-    )
-  );
-
-  redirectAfterLogoutEffect = createEffect(() =>
-    this.actions$.pipe(
-      ofType(authActions.logoutSuccess),
-      tap(() => {
-        localStorage.removeItem("data");
-        // this.router.navigateByUrl('/auth/signin')
-      })
-    ), { dispatch: false }
-  )
-
+  // PERSIST DATA IF THERE IS NO DATA IN LOCAL STORAGE
   persistanceEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.persistence),
