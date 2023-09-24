@@ -1,0 +1,101 @@
+// TABLE CSS
+.content-wrapper {
+  width: 100%;
+  // height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.content {
+  display: flex;
+  width: 80%;
+}
+
+// .card-container {
+//   display: grid;
+//   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+//   gap: 20px;
+//   justify-content: center;
+// }
+
+.project-card {
+  max-width: 320px;
+}
+.banner {
+  width: 100%;
+  height: 220px;
+  border-radius: 5px;
+  position: relative;
+  background-image: url('../../../../../assets/images/bg-pf.jpg');
+  background-size: cover;
+  transition: all 0.5s ease;
+  background-position: center; /* Add this line */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0);
+    transition: all 0.5s ease;
+}
+
+.banner:hover .overlay {
+    background-color: rgba(0,0,0,0.5);
+}
+
+.banner:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    opacity: 0;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+.text:hover {
+  font-weight: bold;
+  color: greenyellow;
+}
+
+.banner:hover .text {
+    opacity: 1;
+}
+
+
+.details {
+  width: 100%;
+  margin-top: 5px;
+}
+.name {
+  text-overflow: ellipsis;
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: bold;
+}
+.date {
+  font-size: 13px;
+  margin-left: 10px;
+  white-space: nowrap;
+}
+.details div {
+  padding-top: 5px;
+}
+.more-info {
+  width: 100%;
+  display: flex;
+  align-items:baseline;
+}
+.description {
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 16px;
+  text-overflow: ellipsis;
+}

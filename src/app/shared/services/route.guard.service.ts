@@ -12,7 +12,7 @@ class PermissionsService {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean> {
-    console.log('checking if user data exists');
+    // console.log('checking if user data exists');
 
     // Activate route if there is userDetails is available in localStorage
     const data = localStorage.getItem('data');
@@ -21,7 +21,7 @@ class PermissionsService {
       this.store.select(selectCurrentUser).subscribe(currentUser => {
         if (!currentUser) {
           if(user){
-            console.log('User details does not exist so we are persisting users data');
+            // console.log('User details does not exist so we are persisting users data');
             this.store.dispatch(authActions.persistence(user));
           } else {
             console.log('No data to persist, logging you out');
@@ -29,7 +29,7 @@ class PermissionsService {
           }
           // Check if there is data in localStorage before persis
         } else {
-          console.log('User details exist');
+          // console.log('User details exist');
         }
       });
       return true;

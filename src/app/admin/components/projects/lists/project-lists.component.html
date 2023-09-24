@@ -1,11 +1,120 @@
-<!-- *ngIf="data$ | async as data" -->
 <!-- This page lists a number of projects -->
 <ng-container >
+  <!-- List -->
+  <div class="body"  *ngIf="!projectSelect" >
+    <div class="head">
+      <div class="heading">Manage Project</div>
+      <div class="today">{{ currentDate }}</div>
+    </div>
+    <!-- Create button to add project and click on the projects to view more information and when inside it you can click edit to edit it and it will have a cursor ontop of it to enable editing -->
+    <!-- Depending on where you are accessing it from you can also have a part for  -->
+    <div class="bar">
+      <div class="search">
+        <span class="material-symbols-outlined icon"> search </span>
+        <input type="text" class="search-bar" placeholder="Search...">
+      </div>
+      <div class="filter"></div>
+      <div class="s-option" *ngIf="!showForm" (click)="toggleForm()">
+        <span class="material-symbols-outlined"> add_circle </span>
+         <div > New Project </div>
+          <!-- <div *ngIf="showForm" [ngClass]="{'active': showForm}" > Cancel Creation </div> -->
+      </div>
+      <!-- ADD PROJECT -->
 
-    <!-- LIST OF PROJECTS -->
-    Listing projects here
+      <form action="" class="create-project-form" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="showForm" [@slideDown]>
+        
+        <div class="form-options">
+          <div class="h-2">NEW PROJECT</div>
+          <div class="icons">
+            <span class="material-symbols-outlined  tooltip" (click)="clearForm()"> clear_all <span class="tooltiptext">Clear Form</span>  </span>
+            <span class="material-symbols-outlined tooltip" (click)="toggleForm()" > hide_source  <span class="tooltiptext">Minimize Form</span></span>
+            <span class="material-symbols-outlined close tooltip" (click)="close()"> close <span class="tooltiptext"> Close Form</span> </span>
+          </div>
+        </div>
 
-    <!-- VIEW MORE ABOUT PROJECT -->
+        <div class="input-container">
+          <input placeholder="project name" type="text" formControlName="name"/>
+          <!-- VALIDATING -->
+          <div *ngIf="form.get('name')?.touched" class="message">
+            <span class="error" *ngIf="form.get('name')?.errors">
+              provide the name of the project!!!
+            </span>
+          </div>
+        </div>
 
+        <!-- DESCRIPTION -->
+        <div class="input-container">
+          <input placeholder="project description" type="text" formControlName="description"/>
+          <!-- VALIDATING -->
+          <div *ngIf="form.get('description')?.touched" class="message">
+            <span class="error" *ngIf="form.get('description')?.errors">
+              provide a description for a project!!!
+            </span>
+          </div>
+        </div>
+
+        <!-- REPOSITORY -->
+        <div class="input-container">
+          <input placeholder="project repository" type="text" formControlName="repository"/>
+          <!-- VALIDATING -->
+          <div *ngIf="form.get('repository')?.touched" class="message">
+            <span class="error" *ngIf="form.get('repository')?.errors">
+              provide the repository the project is in !!!
+            </span>
+          </div>
+        </div>
+
+        <!-- VISIBILITY -->
+        <div class="input-container">
+          <select formControlName="visibility">
+            <option value="">should the project be visible?</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+          <!-- VALIDATING -->
+          <div *ngIf="form.get('visibility')?.touched" class="message">
+            <span class="error" *ngIf="form.get('visibility')?.errors">
+              Please select the visibility the project is in !!!
+            </span>
+          </div>
+        </div>
+
+        <button class="btn" [disabled]="!form.valid" type="submit">
+          <span *ngIf="!state?.isLoading" >Submit</span> 
+          <div class="flex-center"><div *ngIf="state?.isLoading" id="loading"></div></div>
+        </button>
+
+      </form>
+    </div>
+    <div class="project"  >
+      <!-- Single project -->
+      <div class="card-container"  *ngIf="state?.['projects']" >
+        <div class="project-card" *ngFor="let project of state?.['projects']">
+          <div class="banner" [style.backgroundImage]="'url(' + project.image + ')'" >
+            <div class="overlay"></div>
+            <p class="text" (click)="manageProject(project)" >Manage</p>
+            <!-- Add a github link -->
+            <a href="https://{{project.repository}}" class="github-link" target="_blank">
+              <img src="../../../../assets/images/el_github_light.svg" alt="github" />
+            </a>
+          </div>
+          <div class="details">
+            <div class="name" >{{project.name}}</div>
+            <div class="more-info">
+              <div class="description">{{project.description}}t</div>
+              <div class="date">{{project.createdAt | date}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Manage project -->
+  <div *ngIf="projectSelect" class="body">
+    <!-- onclick manage Project it passes data into the mc-project-forms component (click)="manageProject(project)" -->
+    <mc-project-forms [projectSelect]="projectSelect" (projectEmitter)="receiveProject($event)"></mc-project-forms>
+    
+  </div>
 </ng-container>
-

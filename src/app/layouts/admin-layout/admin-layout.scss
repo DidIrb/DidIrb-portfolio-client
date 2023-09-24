@@ -5,11 +5,32 @@
 .sidebar {
   width: 275px;
   height: 100vh;
-  background-color: #ffffff;
+  background-color: #faf5f4;
 }
 
 .content {
   flex-grow: 1;
   padding: 20px;
-  background-color: #FAF5F4;
+  background-color: #ffffff;
+}
+.message {
+  min-width: 300px;
+  position: fixed;
+  top: 40px;
+  border-radius: 6px;
+  padding: 15px;
+  right: 37px;
+  padding-left: 20px;
+  color: white;
+  z-index: 100;
+}
+
+.success {
+  background-color: #d4edda;
+  color: #155724;
+  font-size: 14px;
+}
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
 }

@@ -1,6 +1,21 @@
 <!-- *ngIf="data$ | async as data" -->
-<ng-container >
-    <!-- Form -->
-    
+<ng-container>
+  <!-- Form -->
+  <div class="form-options">
+    <!-- <input type="text" (keyup)="onKeyup($event.target.value)" [value]="projectSelect.name" [disabled]="!editMode" class="input-field"> -->
+    <div class="icons">
+      {{projectSelect?.name}}
+      <span class="material-symbols-outlined  tooltip"  disabled > delete <span class="tooltiptext">delete</span>  </span>
+      <span class="material-symbols-outlined  tooltip" (click)="editMode = !editMode" [class.editMode]="editMode"  > edit <span class="tooltiptext">Enable Editing</span>  </span>
+      <span class="material-symbols-outlined tooltip" > hide_source  <span class="tooltiptext">Minimize </span></span>
+      <!-- Passes back an back the data into the parent component -->
+      <span class="material-symbols-outlined close tooltip" (click)="sendData()" > close <span class="tooltiptext"> Close </span> </span>
+    </div>
+  </div>
+  <div class="container">
+    <div class="project-content">
+      <div class="project-name"></div>
+    </div>
+    <div class="project-description"></div>
+  </div>
 </ng-container>
-

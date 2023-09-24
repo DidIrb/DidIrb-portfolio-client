@@ -7,7 +7,6 @@ import { AuthResponseInterface } from './types/authResponse.interface';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { authActions } from '../store/auth/action';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService { 
@@ -55,11 +54,15 @@ export class AuthService {
   //   }
   // }
 
-  // Refreshing Token
+  // Refreshing Token 
 
   refreshToken() {
     const url = environment.apiUrl + '/token';
-    return this.http.post(url, {}, { observe: 'response' });
+    return this.http.post(url, {}, { withCredentials: true });
+  }
+  refreshToken0() {
+    const url = environment.apiUrl + '/token';
+    return this.http.post(url, {}, {observe: 'response', withCredentials: true });
   }
 
   logout() {

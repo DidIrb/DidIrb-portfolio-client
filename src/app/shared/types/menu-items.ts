@@ -36,25 +36,3 @@ export interface routes {
   title: string,
   icon: string,
 }
-
-
-// <!-- <div class="link" routerLink="" routerLinkActive="active">
-// <span class="material-symbols-outlined"> globe </span>
-// <span>Projects</span>
-// </div>
-// <div class="link" routerLink="/administrator/guide" routerLinkActive="active">
-// <span class="material-symbols-outlined"> developer_guide </span>
-// <span>Guide</span>
-// </div>
-// <div class="link" routerLink="/administrator/blogs" routerLinkActive="active">
-// <span class="material-symbols-outlined"> rss_feed </span>
-// <span>Blogs</span>
-// </div>
-// <div class="link" routerLink="/administrator/profile" routerLinkActive="active">
-// <span class="material-symbols-outlined"> account_circle </span>
-// <span>Profile</span>
-// </div>
-// <div class="link" routerLink="/administrator/accounts" routerLinkActive="active">
-// <span class="material-symbols-outlined"> manage_accounts </span>
-// <span>Access Control</span>
-// </div> -->

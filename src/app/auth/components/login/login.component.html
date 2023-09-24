@@ -13,7 +13,7 @@
         </mc-backend-error-messages>
         <div>
           <!-- <label for="username">Username</label> -->
-          <input type="text" formControlName="username" id="username" placeholder="Enter Username" />
+          <input type="text" formControlName="username" id="username" placeholder="Username" />
           <!-- VALIDATING USERNAME -->
           <div *ngIf="form.get('username')?.touched" class="message">
             <span class="error" *ngIf="form.get('username')?.errors">
@@ -24,7 +24,7 @@
         <!-- PASSWORD -->
         <div>
           <!-- <label for="password">Password</label> -->
-          <input placeholder="Enter password" type="password" formControlName="password" id="password" />
+          <input placeholder="password" type="password" formControlName="password" id="password" />
           <!-- VALIDATING PASSWORD -->
           <div *ngIf="form.get('password')?.touched" class="message">
             <span class="error" *ngIf="form.get('password')?.errors">
@@ -33,6 +33,9 @@
           </div>
         </div>
         <button class="btn" [disabled]="data.isSubmitting && !form.valid" type="submit">Sign In</button>
+        <!-- <div class="options">
+          <span>Forgot password</span> 
+        </div> -->
       </div>
     </form>
   </div>
