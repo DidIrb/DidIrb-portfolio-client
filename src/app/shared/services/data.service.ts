@@ -15,7 +15,7 @@ export class DataService {
     return this._state.asObservable();
   }
 
-  async fetchData(endpoint: string, stateName: string, retryCount = 0, forceFetch = false): Promise<void> {
+  async fetchData(endpoint: string, stateName: string, page: number, limit: number, retryCount = 0, forceFetch = false): Promise<void> {
     if (!forceFetch && this._state.value[stateName]) {
       return;
     }
@@ -23,18 +23,17 @@ export class DataService {
     this._state.next({ ...this._state.value, isLoading: true });
   
     try {
-      const data = await this.makeRequest('get', endpoint);
+      const data = await this.makeRequest('get', `${endpoint}?_page=${page}&_limit=${limit}`);
       console.log("making request", data)
       this.updateState(stateName, data);
     } catch (error) {
       if (error instanceof HttpErrorResponse && error.status === 401 && retryCount < 3) {
-        await this.handleUnauthorizedError('get', endpoint, stateName, retryCount);
+        await this.handleUnauthorizedError('get', `${endpoint}?_page=${page}&_limit=${limit}`, stateName, retryCount);
       } else {
         this.handleError(error);
       }
     }
   }
-  
 
   async postData(endpoint: string, data: any, stateName: string, retryCount = 0): Promise<any> {
     this._state.next({ ...this._state.value, isLoading: true });
@@ -82,7 +81,6 @@ export class DataService {
   updateState(stateName: string, data: any): void {
     this._state.next({ ...this._state.value, isLoading: false, successMessage: data.message, [stateName]: data.body });
     console.log("updated state", this._state.value);
-    // Clear the success and error messages after 5 seconds
     setTimeout(() => {
       this._state.next({ ...this._state.value, successMessage: null, error: null });
     }, 3000);
@@ -94,7 +92,9 @@ export class DataService {
       const response = await firstValueFrom(this.auth.refreshToken()) as Response;
       if (response.status === 200) {
         if (method === 'get') {
-          await this.fetchData(endpoint, stateName, retryCount + 1);
+          const page = 1; // current page number
+          const limit = 10; // number of items per page
+          await this.fetchData(endpoint, stateName, page, limit, retryCount + 1);
         } else if (method === 'post') {
           await this.postData(endpoint, data ,stateName, retryCount +1)
         } else if (method === 'put') {

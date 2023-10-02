@@ -1,34 +1,26 @@
-<div class="body">
+<div class="body2">
   <div class="container2">
-    
     <div class="bar">
       <div class="search">
         <span class="material-symbols-outlined icon"> search </span>
-        <input type="text" class="search-bar" placeholder="Search..." />
+        <input type="text" class="search-bar" placeholder="Search..." (input)="onSearchChange($event)" />      
       </div>
-      <div class="filter"></div>
+      <div class="filter">
+        <pagination-controls (pageChange)="p = $event; fetchData()"></pagination-controls>
+      </div>
     </div>
 
     <div class="project">
       <!-- Single project -->
       <div class="card-container" *ngIf="state?.['projects']">
-        <div class="project-card" *ngFor="let project of state?.['projects']">
-          <div
-            class="banner"
-            [style.backgroundImage]="'url(' + project.image + ')'"
-          >
+        <div class="project-card" *ngFor="let project of filteredProjects | paginate: { itemsPerPage: 10, currentPage: p }">
+          <div class="banner" [style.backgroundImage]="'url(' + project.image + ')'" >
             <div class="overlay"></div>
             <p class="text">View More</p>
             <!-- Add a github link -->
-            <a
-              href="https://{{ project.repository }}"
-              class="github-link"
-              target="_blank"
-            >
-              <img
-                src="../../../../assets/images/el_github_light.svg"
-                alt="github"
-              />
+            <a href="https://{{ project.repository }}"
+              class="github-link" target="_blank" >
+              <img src="../../../../assets/images/el_github_light.svg" alt="github" />
             </a>
           </div>
           <div class="details">

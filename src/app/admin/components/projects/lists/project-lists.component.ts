@@ -65,7 +65,9 @@ export class ProjectsComponent {
     this.dataService.getState().subscribe(state => {
       this.state = state;
     });
-    const response = this.dataService.fetchData(this.endpoint, this.stateName, 0, false);
+    const page = 1; // start from first page
+    const limit = 10; // number of items per page
+    const response = this.dataService.fetchData(this.endpoint, this.stateName, page, limit, 0, false);
     console.log(this.state, this.state?.['project']);
   }
 
@@ -89,7 +91,9 @@ export class ProjectsComponent {
   
   async receiveProject(project: ProjectInterface) {
     this.projectSelect = project;
-    const response = await this.dataService.fetchData(this.endpoint, this.stateName, 0, true);
+    const page = 1; // start from first page
+    const limit = 10; // number of items per page
+    const response = this.dataService.fetchData(this.endpoint, this.stateName, page, limit, 0, false);
     console.log('updating data fro api', response);
     console.log("received project from child component", this.projectSelect);
   }
