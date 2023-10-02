@@ -1,0 +1,15 @@
+<div class="d-flex container" *ngIf="state">
+    <div *ngIf="errorMessage" class="error message" [@Message]>
+      {{errorMessage}}
+    </div>
+    <div *ngIf="successMessage" class="success message" [@Message]>
+      {{successMessage}}
+    </div>
+
+  <div class="sidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

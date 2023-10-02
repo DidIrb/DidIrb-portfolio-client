@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthEffects {
 
+  // REGISTER EFFECT
   registerEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.register),
@@ -33,7 +34,7 @@ export class AuthEffects {
       })
     )
   );
-
+  // REDIRECT ON SUCCESSFUL REGISTRATION
   redirectAfterRegisterEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.registerSuccess),
@@ -42,7 +43,8 @@ export class AuthEffects {
       })
     ), { dispatch: false }
   )
-
+  
+  // SIGN IN EFFECT
   signInEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.signin),
@@ -65,6 +67,7 @@ export class AuthEffects {
     )
   );
 
+  // REDIRECT ON SUCCESSFUL SIGN IN
   redirectAfterSignInEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.signinSuccess),
@@ -74,6 +77,7 @@ export class AuthEffects {
     ), { dispatch: false }
   )
 
+  // PERSIST DATA IF THERE IS NO DATA IN LOCAL STORAGE
   persistanceEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.persistence),
@@ -83,7 +87,8 @@ export class AuthEffects {
           console.log(userData)
           return authActions.persistenceSuccess({currentUser: userData});
         } else {
-          const error: any = "Details not found"
+          this.router.navigateByUrl('/administrator/home');
+          const error: any = "Details not found so logging you out"
           return authActions.persistenceFailure({ errors: error });
         }
       }),

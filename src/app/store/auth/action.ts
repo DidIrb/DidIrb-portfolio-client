@@ -21,3 +21,8 @@ export const authActions = createActionGroup({
 
 });
 
+// Logout action
+// export const logout = createAction('[Auth] Logout');
+
+
+// Creating an action for 

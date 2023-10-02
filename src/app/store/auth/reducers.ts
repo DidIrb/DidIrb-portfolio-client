@@ -9,6 +9,8 @@ const initialState: AuthStateInterface = {
   validationErrors: null,
 };
 
+
+
 // AUTH FEATURES
 const authFeature = createFeature({
   name: 'auth',
@@ -46,6 +48,7 @@ const authFeature = createFeature({
       isSubmitting: false,
       validationErrors: action.errors,
     })),
+
 
     // PERSISTENCE
     on(authActions.persistence, (state) => ({

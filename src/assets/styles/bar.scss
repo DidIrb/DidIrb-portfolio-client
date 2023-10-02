@@ -1,0 +1,77 @@
+
+
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .h-2 {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+  }
+  .icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .close:hover {
+    background-color: #7f0612;
+  }
+  .icons span {
+    cursor: pointer;
+    // margin-left: 8px;
+  }
+  
+  .icons span:hover {
+    background-color: #ced4da60;
+  }
+  
+  .icons .close:hover {
+    background-color: #ca0000;
+    color: white;
+  }
+  
+  .editMode {
+    background-color: rgb(254, 254, 124);
+    border-radius: 2px;
+    
+  }
+  // Tool Tip
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 15px;
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    top: 125%; /* Place the tooltip above the text */
+    left: 50%;
+    margin-left: -60px; /* Use half of the width to center the tooltip */
+  
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  

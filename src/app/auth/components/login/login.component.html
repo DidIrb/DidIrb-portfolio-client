@@ -1,17 +1,42 @@
-<!-- WE ARE NOT FOCUSING ON THE CSS THIS CAN COME LATER -->
 <ng-container *ngIf="data$ | async as data">
-  <a routerLink="/auth/register">Need an account?</a>
-  <br>
-  <mc-backend-error-messages
-    *ngIf="data.backendErrors"
-    [backendErrors]="data.backendErrors"
-  ></mc-backend-error-messages> 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <input type="text" formControlName="username" placeholder="Username" />
-    <input type="password" formControlName="password" placeholder="Password" />
-    <button [disabled]="data.isSubmitting" type="submit">Submit</button>
-  </form>
-  <!-- <a routerLink="/administrator/home">Go to Component</a> -->
+  <div class="body">
 
+    <!-- FORM -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="header-bg">
+        <h2>Login</h2>
+      </div>
+      <div class="container">
+        
+        <mc-backend-error-messages *ngIf="data.backendErrors" [backendErrors]="data.backendErrors"
+          class="error-message">
+        </mc-backend-error-messages>
+        <div>
+          <!-- <label for="username">Username</label> -->
+          <input type="text" formControlName="username" id="username" placeholder="Username" />
+          <!-- VALIDATING USERNAME -->
+          <div *ngIf="form.get('username')?.touched" class="message">
+            <span class="error" *ngIf="form.get('username')?.errors">
+              please provide a username!!!
+            </span>
+          </div>
+        </div>
+        <!-- PASSWORD -->
+        <div>
+          <!-- <label for="password">Password</label> -->
+          <input placeholder="password" type="password" formControlName="password" id="password" />
+          <!-- VALIDATING PASSWORD -->
+          <div *ngIf="form.get('password')?.touched" class="message">
+            <span class="error" *ngIf="form.get('password')?.errors">
+              password needs to be at least 8 characters.
+            </span>
+          </div>
+        </div>
+        <button class="btn" [disabled]="data.isSubmitting && !form.valid" type="submit">Sign In</button>
+        <!-- <div class="options">
+          <span>Forgot password</span> 
+        </div> -->
+      </div>
+    </form>
+  </div>
 </ng-container>
-

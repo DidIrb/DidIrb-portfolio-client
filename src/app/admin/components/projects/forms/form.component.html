@@ -1,6 +1,81 @@
-<!-- *ngIf="data$ | async as data" -->
-<ng-container >
-    <!-- Form -->
-    
-</ng-container>
+<div class="form-options">
+  <!-- Name -->
+  <!-- {{editMode}} -->
+  <input placeholder="Name" type="text" class="input-field name" [formControl]="name" />
+ <!--  -->
+  <div class="icons">
+    <span class="material-symbols-outlined  tooltip" disabled> delete 
+      <span class="tooltiptext">delete</span> 
+    </span>
+    <span class="material-symbols-outlined  tooltip" (click)="toggleEditMode(!editMode)" [class.editMode]="editMode"> edit
+      <span class="tooltiptext"> Enable Editing </span> 
+    </span>
+    <span class="material-symbols-outlined tooltip"> hide_source <span class="tooltiptext">Minimize </span></span>
+    <span class="material-symbols-outlined close tooltip" (click)="sendData()"> close 
+      <span class="tooltiptext"> Close </span> 
+    </span>
+  </div>
+
+</div>
+<div class="container">
+  <div class="project-content">
+    <div class="project-banner shadow" [style.backgroundImage]="'url(' + projectSelect?.image + ')'" ></div>
+    <div class="content">
+      <textarea placeholder="Project Description" class="input-field" [formControl]="description" 
+      appAutoGrow ></textarea>
+    </div>
+  </div>
+
+  <div class="project-description">
+
+    <h3>More information</h3>
+    <div class="summary">
+      <div class="betw">
+        <div>Update On:</div> 
+        <span>{{projectSelect?.createdAt | date}}</span></div>
+      <div class="betw">
+        <div> Created On: </div> 
+        <span>{{projectSelect?.updatedAt | date}}</span></div>
+      <div class="betw">
+        <div>Visibility:</div> 
+        
+        <span class="input">
+          <input type="radio" name="visibility" id="yes" [checked]="projectSelect?.visibility === 'yes'" (change)="value = 'yes'">
+          <label for="yes"> Yes </label>
+          <input type="radio" name="visibility" id="no" [checked]="projectSelect?.visibility === 'no'" (change)="value = 'no'">
+          <label for="no"> No </label>          
+        </span>
+      </div>
+    </div>
+
+    <div class="quick-links">
+      <!-- <span>Linkedin</span>
+      <span>Like</span>
+      <span>Prototype</span> -->
+    </div>
+
+    <div class="technology">
+      <!-- Adding types -->
+      <div class="Languages">
+        <h3>Frameworks</h3> 
+        <div class="list">
+
+        </div>
+      </div>
+      <div class="frameworks">
+        <h3>Languages</h3> 
+        <div class="list">
+
+        </div>
+      </div>
+      <div class="github">
+        <h3>Repository</h3> 
+        <textarea placeholder="Github repository" class="input-field"  [formControl]="repository" appAutoGrow></textarea>
+      </div>
+      
+    </div>
+    <div class="brand"> </div>
+  </div>
+</div>
+
 

@@ -1,0 +1,21 @@
+.navbar {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.links {
+    display: flex;
+}
+
+.link {
+    margin-left: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.link:hover, .active {
+    color: red;
+    font-weight: bold;
+}

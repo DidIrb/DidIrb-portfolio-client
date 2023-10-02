@@ -8,22 +8,23 @@ import { isDevMode } from '@angular/core';
 import { authFeatureKey, authReducer } from './app/store/auth/reducers';
 import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { provideEffects } from '@ngrx/effects';
-import { TokenInterceptor } from './app/shared/services/http-interceptor.service';
-import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { AuthEffects } from './app/store/auth/effects';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { TokenInterceptor } from './app/shared/services/http-interceptor.service';
+import { DatePipe } from '@angular/common';
 // adding it my main.ts file
 
 bootstrapApplication(AppComponent, {
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    provideAnimations(),
     provideHttpClient(),
     provideRouter(appRoute),
     provideStore(),
     provideState(authFeatureKey, authReducer),
     AuthEffects,
+    DatePipe,
     provideEffects([AuthEffects]),
-    JwtHelperService,
-    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),

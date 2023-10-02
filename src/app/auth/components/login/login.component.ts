@@ -13,6 +13,7 @@ import { BackendErrorMessages } from 'src/app/shared/components/backendErrorMess
   selector: 'mc-login',
   templateUrl: './login.component.html',
   standalone: true,
+  styleUrls: ['./login.component.scss'],
   imports: [
     ReactiveFormsModule,
     RouterLink,
@@ -25,8 +26,8 @@ export class LoginComponent {
 
   // Building the form
   form = this.fb.nonNullable.group({
-    username: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.min(8)]],
   });
   
   data$ = combineLatest({
