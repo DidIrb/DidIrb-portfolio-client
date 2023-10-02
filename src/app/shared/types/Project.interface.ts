@@ -6,6 +6,7 @@ export interface ProjectInterface {
     repository: string | null;
     visibility: string;
     banner?: string | null;
+    image?:string | null;
 }    
 
 export interface ProjectStateInterface {

@@ -65,16 +65,18 @@ export class ProjectsComponent {
     this.dataService.getState().subscribe(state => {
       this.state = state;
     });
-    const response = this.dataService.fetchData(this.endpoint, this.stateName, 0, true);
+    const response = this.dataService.fetchData(this.endpoint, this.stateName, 0, false);
     console.log(this.state, this.state?.['project']);
   }
 
   async postData(data: ProjectInterface) {
     try {
-      await this.dataService.postData(this.endpoint, data, this.stateName);
-      const response = await this.dataService.fetchData(this.endpoint, this.stateName, 0, true);
-      this.clearForm();
-      console.log('Fetched data:', response);
+      this.dataService.postData(this.endpoint, data, this.stateName)
+      .then((postResponse) => {
+        this.manageProject(postResponse.body);
+        console.log('Making new request for data', postResponse);
+      }); 
+      this.close();
     } catch (error) {
       console.error('Error posting data:', error);
     }
@@ -85,8 +87,10 @@ export class ProjectsComponent {
     console.log("changing views to manage project", this.projectSelect);
   }
   
-  receiveProject(project: ProjectInterface) {
+  async receiveProject(project: ProjectInterface) {
     this.projectSelect = project;
+    const response = await this.dataService.fetchData(this.endpoint, this.stateName, 0, true);
+    console.log('updating data fro api', response);
     console.log("received project from child component", this.projectSelect);
   }
 

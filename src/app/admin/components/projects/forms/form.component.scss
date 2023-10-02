@@ -1,1 +1,99 @@
-@import "../../../../../assets/styles/bar.scss"
+@import "../../../../../assets/styles/bar.scss";
+
+.input-field:disabled {
+  border: none;
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  color: black;
+}
+
+.input-field:not(:disabled) {
+  border: none;
+  border-bottom: 0.4px dashed grey;
+  // padding-top: 3px;
+  outline: none;
+}
+
+.input-field {
+  font-size: 16px;
+}
+
+.form-options .name {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.form-options {
+  position: sticky;
+}
+.project-banner {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  background-size: cover;
+  transition: all 0.5s ease;
+  background-position: center; /* Add this line */
+}
+.shadow {
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.container {
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+.project-content {
+  width: 70%;
+}
+.project-description {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30%;
+  padding-right: 20px;
+  padding-left: 20px;
+  height: 500px;
+}
+
+h3 {
+  margin-bottom: 5px;
+}
+.quick-links {
+  margin-bottom: 5px;
+}
+.summary {
+  width: 100%;
+}
+.betw {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.betw div {
+  padding-left: 5px;
+  font-style: italic;
+}
+
+.input {
+  display: inline-flex;
+  display: flex;
+}
+.input label {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.content {
+  padding-top: 15px;
+  width: 100%;
+}
+
+textarea {
+  font-size: 18px;
+  width: 100%;
+  resize: none;
+}

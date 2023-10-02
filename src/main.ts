@@ -11,6 +11,7 @@ import { provideEffects } from '@ngrx/effects';
 import { AuthEffects } from './app/store/auth/effects';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { TokenInterceptor } from './app/shared/services/http-interceptor.service';
+import { DatePipe } from '@angular/common';
 // adding it my main.ts file
 
 bootstrapApplication(AppComponent, {
@@ -22,6 +23,7 @@ bootstrapApplication(AppComponent, {
     provideStore(),
     provideState(authFeatureKey, authReducer),
     AuthEffects,
+    DatePipe,
     provideEffects([AuthEffects]),
     provideStoreDevtools({
       maxAge: 25,

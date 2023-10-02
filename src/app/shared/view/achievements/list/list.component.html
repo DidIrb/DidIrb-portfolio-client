@@ -1,18 +1,42 @@
-<div class="content-wrapper">
-  <div class="content">
-    <div class="card-container"> <!--  -->
-      <div class="project-card">
-        <div class="banner">
-          <div class="overlay"></div>
-          <p class="text">Read More</p>
-        </div>
-        <div class="details">
-          <div class="name">Project Hope</div>
-          <div class="more-info"> <!-- width is 100% -->
-            <!-- I want to make the description to cover be visible for a certain area and add ... hiding what overflows -->
-            <div class="description">A simple description of the project </div>
-            <div class="date">9th 12 2023</div>
-            <!-- I want this to cover the space it needs -->
+<div class="body">
+  <div class="container2">
+    
+    <div class="bar">
+      <div class="search">
+        <span class="material-symbols-outlined icon"> search </span>
+        <input type="text" class="search-bar" placeholder="Search..." />
+      </div>
+      <div class="filter"></div>
+    </div>
+
+    <div class="project">
+      <!-- Single project -->
+      <div class="card-container" *ngIf="state?.['projects']">
+        <div class="project-card" *ngFor="let project of state?.['projects']">
+          <div
+            class="banner"
+            [style.backgroundImage]="'url(' + project.image + ')'"
+          >
+            <div class="overlay"></div>
+            <p class="text">View More</p>
+            <!-- Add a github link -->
+            <a
+              href="https://{{ project.repository }}"
+              class="github-link"
+              target="_blank"
+            >
+              <img
+                src="../../../../assets/images/el_github_light.svg"
+                alt="github"
+              />
+            </a>
+          </div>
+          <div class="details">
+            <div class="name">{{ project.name }}</div>
+            <div class="more-info">
+              <div class="description">{{ project.description }}t</div>
+              <div class="date">{{ project.createdAt }}</div>
+            </div>
           </div>
         </div>
       </div>

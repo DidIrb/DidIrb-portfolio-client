@@ -36,9 +36,7 @@
           <input placeholder="project name" type="text" formControlName="name"/>
           <!-- VALIDATING -->
           <div *ngIf="form.get('name')?.touched" class="message">
-            <span class="error" *ngIf="form.get('name')?.errors">
-              provide the name of the project!!!
-            </span>
+            <span class="error" *ngIf="form.get('name')?.errors"> provide the name of the project!!! </span>
           </div>
         </div>
 
@@ -86,10 +84,11 @@
 
       </form>
     </div>
+
     <div class="project"  >
       <!-- Single project -->
       <div class="card-container"  *ngIf="state?.['projects']" >
-        <div class="project-card" *ngFor="let project of state?.['projects']">
+        <div class="project-card" *ngFor="let project of state?.['projects']" >
           <div class="banner" [style.backgroundImage]="'url(' + project.image + ')'" >
             <div class="overlay"></div>
             <p class="text" (click)="manageProject(project)" >Manage</p>
@@ -107,14 +106,12 @@
           </div>
         </div>
       </div>
-      
     </div>
   </div>
 
   <!-- Manage project -->
   <div *ngIf="projectSelect" class="body">
-    <!-- onclick manage Project it passes data into the mc-project-forms component (click)="manageProject(project)" -->
     <mc-project-forms [projectSelect]="projectSelect" (projectEmitter)="receiveProject($event)"></mc-project-forms>
-    
   </div>
+  
 </ng-container>

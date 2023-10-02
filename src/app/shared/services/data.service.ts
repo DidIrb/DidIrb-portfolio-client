@@ -36,12 +36,14 @@ export class DataService {
   }
   
 
-  async postData(endpoint: string, data: any, stateName: string, retryCount = 0): Promise<void> {
+  async postData(endpoint: string, data: any, stateName: string, retryCount = 0): Promise<any> {
     this._state.next({ ...this._state.value, isLoading: true });
 
     try {
       const responseData = await this.makeRequest('post', endpoint, data);
-      this.updateState(stateName, responseData);
+      this._state.next({ ...this._state.value, isLoading: false, successMessage: responseData.message });
+      return responseData;
+      // this.updateState(stateName, responseData);
     } catch (error) {
       if (error instanceof HttpErrorResponse && error.status === 401 && retryCount < 3) {
         await this.handleUnauthorizedError('post', endpoint, stateName, retryCount, data);
@@ -94,7 +96,7 @@ export class DataService {
         if (method === 'get') {
           await this.fetchData(endpoint, stateName, retryCount + 1);
         } else if (method === 'post') {
-          await this.postData(endpoint,data,stateName,retryCount +1)
+          await this.postData(endpoint, data ,stateName, retryCount +1)
         } else if (method === 'put') {
           await this.putData(endpoint,data,stateName,retryCount +1)
         }
